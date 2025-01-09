@@ -1,13 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deep Equals</title>
+  <title>Deep Equals Function</title>
 </head>
 <body>
   <h1>Deep Equals Function</h1>
-  <p>Open the browser console to test the <code>deepEquals</code> function.</p>
+  <p>Click the button below to run test cases for the <code>deepEquals</code> function. Check the console for the results.</p>
+  <button id="run-tests">Run Test Cases</button>
+
   <script>
     function deepEquals(value1, value2) {
       // Check if the types are different
@@ -69,16 +72,27 @@
       return true;
     }
 
-    // Example tests
-    console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 3], a: 1 })); // true
-    console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 4], a: 1 })); // false
-    console.log(deepEquals([1, { x: 10 }], [1, { x: 10 }])); // true
-    console.log(deepEquals([1, { x: 10 }], [1, { x: 11 }])); // false
-    console.log(deepEquals(null, null)); // true
-    console.log(deepEquals(undefined, undefined)); // true
-    console.log(deepEquals(NaN, NaN)); // true
-    console.log(deepEquals(null, undefined)); // false
-    console.log(deepEquals({ a: 1 }, { a: 1, b: 2 })); // false
+    // Test cases
+    function runTestCases() {
+      console.log("Running test cases for deepEquals...");
+
+      console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 3], a: 1 })); // true
+      console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 4], a: 1 })); // false
+      console.log(deepEquals([1, { x: 10 }], [1, { x: 10 }])); // true
+      console.log(deepEquals([1, { x: 10 }], [1, { x: 11 }])); // false
+      console.log(deepEquals(null, null)); // true
+      console.log(deepEquals(undefined, undefined)); // true
+      console.log(deepEquals(NaN, NaN)); // true
+      console.log(deepEquals(null, undefined)); // false
+      console.log(deepEquals({ a: 1 }, { a: 1, b: 2 })); // false
+
+      console.log("Test cases completed!");
+    }
+
+    // Add event listener to the button
+    document.getElementById("run-tests").addEventListener("click", runTestCases);
   </script>
 </body>
 </html>
+
+
