@@ -1,16 +1,84 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Equals</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Deep Equals Function</h1>
+  <p>Open the browser console to test the <code>deepEquals</code> function.</p>
+  <script>
+    function deepEquals(value1, value2) {
+      // Check if the types are different
+      if (typeof value1 !== typeof value2) {
+        return false;
+      }
 
+      // Check for NaN
+      if (typeof value1 === "number" && typeof value2 === "number") {
+        return isNaN(value1) && isNaN(value2);
+      }
+
+      // Check for null and undefined
+      if (value1 === null || value2 === null) {
+        return value1 === value2;
+      }
+
+      if (value1 === undefined || value2 === undefined) {
+        return value1 === value2;
+      }
+
+      // Check for primitive values (string, number, boolean, etc.)
+      if (typeof value1 !== "object") {
+        return value1 === value2;
+      }
+
+      // Check for arrays
+      if (Array.isArray(value1) && Array.isArray(value2)) {
+        if (value1.length !== value2.length) {
+          return false;
+        }
+
+        for (let i = 0; i < value1.length; i++) {
+          if (!deepEquals(value1[i], value2[i])) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      if (Array.isArray(value1) || Array.isArray(value2)) {
+        return false; // One is an array and the other isn't
+      }
+
+      // Check for objects
+      const keys1 = Object.keys(value1);
+      const keys2 = Object.keys(value2);
+
+      if (keys1.length !== keys2.length) {
+        return false;
+      }
+
+      for (const key of keys1) {
+        if (!keys2.includes(key) || !deepEquals(value1[key], value2[key])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    // Example tests
+    console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 3], a: 1 })); // true
+    console.log(deepEquals({ a: 1, b: [2, 3] }, { b: [2, 4], a: 1 })); // false
+    console.log(deepEquals([1, { x: 10 }], [1, { x: 10 }])); // true
+    console.log(deepEquals([1, { x: 10 }], [1, { x: 11 }])); // false
+    console.log(deepEquals(null, null)); // true
+    console.log(deepEquals(undefined, undefined)); // true
+    console.log(deepEquals(NaN, NaN)); // true
+    console.log(deepEquals(null, undefined)); // false
+    console.log(deepEquals({ a: 1 }, { a: 1, b: 2 })); // false
+  </script>
 </body>
-
 </html>
